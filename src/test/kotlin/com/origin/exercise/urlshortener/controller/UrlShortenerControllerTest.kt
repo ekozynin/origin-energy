@@ -24,7 +24,7 @@ class UrlShortenerControllerTest {
     @Test
     fun `POST shorten returns 201 with short URL`() {
         mockMvc.perform(
-            post("/shorten")
+            post("/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"url": "https://www.originenergy.com.au/electricity-gas/plans.html"}""")
         )
@@ -36,7 +36,7 @@ class UrlShortenerControllerTest {
     @Test
     fun `POST shorten returns 400 for invalid URL`() {
         mockMvc.perform(
-            post("/shorten")
+            post("/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"url": "not-a-valid-url"}""")
         )
@@ -47,7 +47,7 @@ class UrlShortenerControllerTest {
     @Test
     fun `POST shorten returns 400 for empty body`() {
         mockMvc.perform(
-            post("/shorten")
+            post("/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{}")
         )
@@ -57,7 +57,7 @@ class UrlShortenerControllerTest {
     @Test
     fun `GET redirect returns 302 for existing code`() {
         val response = mockMvc.perform(
-            post("/shorten")
+            post("/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"url": "https://example.com"}""")
         ).andReturn().response
@@ -80,7 +80,7 @@ class UrlShortenerControllerTest {
     @Test
     fun `GET info returns URL details for existing code`() {
         val response = mockMvc.perform(
-            post("/shorten")
+            post("/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"url": "https://example.com/info-test"}""")
         ).andReturn().response
@@ -105,7 +105,7 @@ class UrlShortenerControllerTest {
     @Test
     fun `POST shorten returns 400 for malformed JSON`() {
         mockMvc.perform(
-            post("/shorten")
+            post("/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("not json")
         )
@@ -116,7 +116,7 @@ class UrlShortenerControllerTest {
     @Test
     fun `POST shorten returns 400 for null URL field`() {
         mockMvc.perform(
-            post("/shorten")
+            post("/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"url": null}""")
         )
@@ -126,7 +126,7 @@ class UrlShortenerControllerTest {
     @Test
     fun `POST shorten returns 400 for ftp scheme`() {
         mockMvc.perform(
-            post("/shorten")
+            post("/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"url": "ftp://files.example.com/data"}""")
         )
@@ -137,7 +137,7 @@ class UrlShortenerControllerTest {
     @Test
     fun `POST shorten returns 400 for whitespace-only URL`() {
         mockMvc.perform(
-            post("/shorten")
+            post("/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"url": "   "}""")
         )
@@ -149,7 +149,7 @@ class UrlShortenerControllerTest {
     fun `POST shorten preserves URL with query and fragment`() {
         val url = "https://example.com/path?q=1&r=2#section"
         val response = mockMvc.perform(
-            post("/shorten")
+            post("/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""{"url": "$url"}""")
         )

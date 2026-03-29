@@ -58,7 +58,7 @@ Full API documentation is available in [api-docs.html](API-DOCS.html) — open i
 ### Shorten a URL
 
 ```
-POST /shorten
+POST /
 Content-Type: application/json
 
 {"url": "https://www.originenergy.com.au/electricity-gas/plans.html"}

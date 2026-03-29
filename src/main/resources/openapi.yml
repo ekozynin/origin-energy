@@ -9,7 +9,7 @@ tags:
     description: URL shortening operations
 
 paths:
-  /shorten:
+  /:
     post:
       tags:
         - url-shortener
